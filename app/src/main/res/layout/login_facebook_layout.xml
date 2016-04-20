@@ -17,7 +17,25 @@
         android:layout_height="40dp"
         android:layout_below="@+id/imageView"
         android:layout_marginTop="40dp"
-        android:background="@color/com_facebook_blue">
+        android:background="@color/com_facebook_blue"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgFacebookLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:src="@drawable/rbz_facebook_logo"
+            android:paddingRight="5dp"/>
+        <TextView
+            android:id="@+id/lblSignInFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login with Facebook"
+            android:gravity="center"
+            android:textColor="@color/common_signin_btn_text_dark"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/imgFacebookLogo"/>
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btnLoginWithFacebook"
