@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -30,9 +31,8 @@ import java.util.ArrayList;
  */
 public class LoginWithFacebookActivity extends Activity {
 
-    private TextView info;
-    private ArrayList<String>User;
-    private LoginButton loginButton;
+    private LoginButton btnLoginWithFacebook;
+    private RelativeLayout relFacebookLogin;
     private CallbackManager callbackManager;
     private AccessToken accessToken;
     /**
@@ -48,16 +48,17 @@ public class LoginWithFacebookActivity extends Activity {
         setContentView(R.layout.login_facebook_layout);
         callbackManager = CallbackManager.Factory.create();
 
-        info = (TextView)findViewById(R.id.info);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btnLoginWithFacebook = (LoginButton) findViewById(R.id.btnLoginWithFacebook);
+        relFacebookLogin = (RelativeLayout) findViewById(R.id.relFacebookLogin);
+        relFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnLoginWithFacebook.performClick();
             }
         });
 
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        btnLoginWithFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     GraphRequest request = GraphRequest.newMeRequest(
