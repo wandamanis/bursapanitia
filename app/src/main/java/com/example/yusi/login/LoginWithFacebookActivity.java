@@ -2,11 +2,14 @@ package com.example.yusi.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -16,6 +19,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,6 +38,9 @@ public class LoginWithFacebookActivity extends Activity {
     private LoginButton btnLoginWithFacebook;
     private RelativeLayout relFacebookLogin;
     private CallbackManager callbackManager;
+    private SharedPreferences pref;
+    private  String name, profileUrl;
+    private  Uri profpic;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -49,6 +56,7 @@ public class LoginWithFacebookActivity extends Activity {
 
         btnLoginWithFacebook = (LoginButton) findViewById(R.id.btnLoginWithFacebook);
         relFacebookLogin = (RelativeLayout) findViewById(R.id.relFacebookLogin);
+         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         relFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +75,26 @@ public class LoginWithFacebookActivity extends Activity {
                                 @Override
                                 public void onCompleted(JSONObject object, GraphResponse response) {
                                     Log.v("Main", response.toString());
+                                    try {
+                                        name = object.getString("name");
+                                        Profile prof = Profile.getCurrentProfile();
+                                       // profpic = prof.getProfilePictureUri(200,200);
+                                        profileUrl = "http://graph.facebook.com/" + object.getString("id") + "/picture";
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     LoginWithFacebookActivity.this.finish();
                                     Intent intent = new Intent(LoginWithFacebookActivity.this, NavDrawerInfoLoginActivity.class);
+                                    intent.putExtra("name", name);
+                                    intent.putExtra("profileUrl", profileUrl);
+                                    Toast.makeText(getApplicationContext(), profileUrl, Toast.LENGTH_LONG).show();
                                     startActivity(intent);
                                 }
                             });
                     Bundle parameters = new Bundle();
                     parameters.putString("fields", "id,name,email,gender, birthday");
+//                    SharedPreferences.Editor editor = pref.edit();
+//                    editor.putString("name",name);
                     request.setParameters(parameters);
                     request.executeAsync();
                 }
