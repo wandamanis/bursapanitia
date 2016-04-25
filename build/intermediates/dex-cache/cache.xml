@@ -1,2 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.1_88226ba1b45cd0663958bc908be74d67a7038c2c.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_df3a2491a3a31a7953730ce0af013db37b5fcfd9.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-appindexing-8.1.0_349b8eacc11550c17a0cc867ac6e59539aed5bc7.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_327b9780c2f714f7bcb4f474d3e5d870bf179398.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0_9affc73047be136bfa9ca038f4ae12e106c0efb2.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_40a8fb8dd2c44e2ed90480c104eceb07b0fe717f.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.7.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5bdb38b7e4b6094891648c1dc4dc08589b460f97">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.facebook.android-facebook-android-sdk-4.7.0_8711da7359f83a65ba6058b23eec3833593ecdad.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.1.0_7f9d9551574f3061ca440e43eb8719d9ca258293.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_f9f5ff86203bf66ea0291a9602e5eddd265e289b.jar" />
+    </item>
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_4f0ce91b23f33b0bbc061cf652332ac7e96dae7d.jar" />
+    </item>
+
+</items>

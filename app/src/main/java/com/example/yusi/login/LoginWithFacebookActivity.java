@@ -68,7 +68,7 @@ public class LoginWithFacebookActivity extends Activity {
                                 public void onCompleted(JSONObject object, GraphResponse response) {
                                     Log.v("Main", response.toString());
                                     LoginWithFacebookActivity.this.finish();
-                                    Intent intent = new Intent(LoginWithFacebookActivity.this, MainMenuActivity.class);
+                                    Intent intent = new Intent(LoginWithFacebookActivity.this, NavDrawerInfoLoginActivity.class);
                                     startActivity(intent);
                                 }
                             });
