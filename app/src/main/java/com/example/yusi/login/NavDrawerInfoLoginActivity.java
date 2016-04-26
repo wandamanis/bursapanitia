@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 /**
  * Created by wanda on 20/04/16.
  */
@@ -24,6 +26,7 @@ public class NavDrawerInfoLoginActivity extends AppCompatActivity implements Fra
     private FragmentDrawer drawerFragment;
     private TextView lblName;
     private ImageView imgProfilePict;
+    private JSONObject response, profile_pic_data, profile_pic_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class NavDrawerInfoLoginActivity extends AppCompatActivity implements Fra
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
+        String jsondata = intent.getStringExtra("jsondata");
+        // call setNavigationHeader Method.
+
 
         drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -44,15 +50,32 @@ public class NavDrawerInfoLoginActivity extends AppCompatActivity implements Fra
 
         lblName = (TextView)findViewById(R.id.lblName);
         imgProfilePict = (ImageView)findViewById(R.id.imgProfilePict);
-        lblName.setText(""+intent.getStringExtra("name"));
-        lblName.setVisibility(View.GONE);
-        imgProfilePict.setImageURI(Uri.parse(""+intent.getStringExtra("profileUrl")));
+//        lblName.setText("" + intent.getStringExtra("name"));
+//        lblName.setVisibility(View.GONE);
+       // imgProfilePict.setImageURI(Uri.parse(""+intent.getStringExtra("profileUrl")));
         //Picasso.with(getApplicationContext()).load(""+intent.getStringExtra("profileUrl")).into(imgProfilePict);
+        setUserProfile(jsondata);
 
 
 
     }
 
+    public  void  setUserProfile(String jsondata){
+
+        try {
+            response = new JSONObject(jsondata);
+          //  user_email.setText(response.get("email").toString());
+            lblName.setText(response.get("name").toString());
+            profile_pic_data = new JSONObject(response.get("picture").toString());
+            profile_pic_url = new JSONObject(profile_pic_data.getString("data"));
+
+            Picasso.with(this).load(profile_pic_url.getString("url"))
+                    .into(imgProfilePict);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onDrawerItemSelected(View view, int position) {

@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="/home/skyshi/Downloads/bursapanitia/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-1.3.0_887c6de049626527135c2b814e22309fece4a074.jar" />
+    </item>
+
+</items>

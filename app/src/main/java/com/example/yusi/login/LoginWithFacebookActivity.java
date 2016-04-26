@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,95 +35,94 @@ import java.util.ArrayList;
 /**
  * Created by yusi on 15/04/16.
  */
-public class LoginWithFacebookActivity extends Activity {
+public class LoginWithFacebookActivity extends AppCompatActivity {
 
-    private LoginButton btnLoginWithFacebook;
-    private RelativeLayout relFacebookLogin;
-    private CallbackManager callbackManager;
-    private SharedPreferences pref;
-    private  String name, profileUrl;
-    private  Uri profpic;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     *
-     */
-    private GoogleApiClient client;
-
+    CallbackManager callbackManager;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        facebookSDKInitialize();
         setContentView(R.layout.login_facebook_layout);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.btnLoginWithFacebook);
+        loginButton.setReadPermissions("email");
+        getLoginDetails(loginButton);
+    }
+
+    protected void getUserInfo(LoginResult login_result){
+
+        GraphRequest data_request = GraphRequest.newMeRequest(
+                login_result.getAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject json_object,
+                            GraphResponse response) {
+                        Log.d("jsondata", json_object.toString());
+                        LoginWithFacebookActivity.this.finish();
+                        Intent intent =  new Intent(LoginWithFacebookActivity.this, NavDrawerInfoLoginActivity.class);
+                        intent.putExtra("jsondata", json_object.toString());
+                        startActivity(intent);
+                    }
+                });
+        Bundle permission_param = new Bundle();
+        permission_param.putString("fields", "id,name,email,picture.width(120).height(120)");
+        data_request.setParameters(permission_param);
+        data_request.executeAsync();
+
+    }
+
+    protected void facebookSDKInitialize() {
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+    }
 
-        btnLoginWithFacebook = (LoginButton) findViewById(R.id.btnLoginWithFacebook);
-        relFacebookLogin = (RelativeLayout) findViewById(R.id.relFacebookLogin);
-         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        relFacebookLogin.setOnClickListener(new View.OnClickListener() {
+    protected void getLoginDetails(LoginButton login_button){
+
+        // Callback registration
+        login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onClick(View v) {
-                btnLoginWithFacebook.performClick();
+            public void onSuccess(LoginResult login_result) {
+                getUserInfo(login_result);
+//                Intent intent = new Intent(LoginWithFacebookActivity.this, NavDrawerInfoLoginActivity.class);
+//                startActivity(intent);
+
             }
-        });
 
-
-        btnLoginWithFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    GraphRequest request = GraphRequest.newMeRequest(
-                            loginResult.getAccessToken(),
-                            new GraphRequest.GraphJSONObjectCallback() {
-
-                                @Override
-                                public void onCompleted(JSONObject object, GraphResponse response) {
-                                    Log.v("Main", response.toString());
-                                    try {
-                                        name = object.getString("name");
-                                        Profile prof = Profile.getCurrentProfile();
-                                       // profpic = prof.getProfilePictureUri(200,200);
-                                        profileUrl = "http://graph.facebook.com/" + object.getString("id") + "/picture";
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    LoginWithFacebookActivity.this.finish();
-                                    Intent intent = new Intent(LoginWithFacebookActivity.this, NavDrawerInfoLoginActivity.class);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("profileUrl", profileUrl);
-                                    Toast.makeText(getApplicationContext(), profileUrl, Toast.LENGTH_LONG).show();
-                                    startActivity(intent);
-                                }
-                            });
-                    Bundle parameters = new Bundle();
-                    parameters.putString("fields", "id,name,email,gender, birthday");
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("name",name);
-                    request.setParameters(parameters);
-                    request.executeAsync();
-                }
-
-
-                @Override
+            @Override
             public void onCancel() {
-             //   info.setText("Login attempt canceled.");
-
+                // code for cancellation
             }
 
             @Override
-            public void onError(FacebookException e) {
-              //  info.setText("Login attempt failed.");
-
+            public void onError(FacebookException exception) {
+                //  code to handle error
             }
-
-
-
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.e("data", data.toString());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
+
+
 }
-
-
